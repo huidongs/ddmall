@@ -1,0 +1,31 @@
+pagehelper:
+  helperDialect:  mysql
+  reasonable: true
+  supportMethodsArguments:  true
+  params: count=countSql
+
+spring:
+  datasource:
+    druid:
+      url:  jdbc:mysql://rm-uf60cb427hat3ys25fo.mysql.rds.aliyuncs.com:3306/ddmall?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC&allowPublicKeyRetrieval=true&verifyServerCertificate=false&useSSL=false
+      driver-class-name:  com.mysql.cj.jdbc.Driver
+      username:  ddmall
+      password:  ddmall123456
+      # 初始化大小，最小，最大
+      initial-size:  10
+      max-active:  50
+      min-idle:  10
+      # 配置获取连接等待超时的时间
+      max-wait:  60000
+      # 打开PSCache，并且指定每个连接上PSCache的大小
+      pool-prepared-statements:  true
+      max-pool-prepared-statement-per-connection-size:  20
+      validation-query:  SELECT 1 FROM DUAL
+      test-on-borrow:  false
+      test-on-return:  false
+      test-while-idle:  true
+      # 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
+      time-between-eviction-runs-millis:  60000
+      # 配置监控统计拦截的filters，去掉后监控界面sql无法统计，'wall'用于防火墙
+      filters:  stat,wall
+
