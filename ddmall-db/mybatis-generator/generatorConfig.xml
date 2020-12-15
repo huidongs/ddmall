@@ -6,8 +6,13 @@
 <generatorConfiguration>
 
     <context id="mysqlgenerator" targetRuntime="MyBatis3">
+        <!--如果为 true,则 MBG 将分隔 SQL 关键字(如果这些关键字在表中用作列名称)
+            MBG 维护许多不同数据库的 SQL 关键字列表。然而,该清单可能并不完全全面
+            如果特定关键字不在 MBG 列表中,则可以强制使用<columnOverride>分隔列
+            有关 MBG 识别的关键字列表,请参阅类 org.mybatis.gener.内部.db.db.Sql 保留Words的源代码。
+            默认值为 false-->
         <property name="autoDelimitKeywords" value="true"/>
-        <!--可以使用``包括字段名，避免字段名与sql保留字冲突报错-->
+        <!-- 可以使用``包括字段名，避免字段名与sql保留字冲突报错,默认值为双引号 (*)。-->
         <property name="beginningDelimiter" value="`"/>
         <property name="endingDelimiter" value="`"/>
 
@@ -38,6 +43,7 @@
 
         <commentGenerator>
             <property name="suppressDate" value="true"/>
+            <property name="addRemarkComments" value="true"/>
             <!--<property name="suppressAllComments" value="true"/>-->
         </commentGenerator>
 
@@ -46,145 +52,150 @@
                         connectionURL="jdbc:mysql://127.0.0.1:3306/ddmall?useUnicode=true&amp;characterEncoding=UTF-8&amp;serverTimezone=UTC&amp;verifyServerCertificate=false&amp;useSSL=false"
                         userId="ddmall"
                         password="ddmall123456"/>
-
         <javaTypeResolver>
+            <!--        DATE	java.time.LocalDate-->
+            <!--        TIME	java.time.LocalTime-->
+            <!--        TIMESTAMP	java.time.LocalDateTime-->
             <property name="useJSR310Types" value="true"/>
         </javaTypeResolver>
 
+        <!--实体-->
         <javaModelGenerator targetPackage="pers.huidong.ddmall.db.domain" targetProject="src/main/java"/>
+        <!--映射xml-->
         <sqlMapGenerator targetPackage="pers.huidong.ddmall.db.dao" targetProject="src/main/resources"/>
+        <!--mapper接口-->
         <javaClientGenerator type="XMLMAPPER" targetPackage="pers.huidong.ddmall.db.dao"
                              targetProject="src/main/java"/>
         <!--表名-->
-<!--        generatedKey的意义是，调用mapper插入一条数据到数据库之后，能从当前这个Entity中获取到插入之后的Id,如下：-->
-
-<!--        <table tableName="ddmall_ad">-->
-<!--            <generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
-<!--        </table>-->
-<!--        <table tableName="ddmall_address">-->
-<!--            <generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
-<!--        </table>-->
-<!--        <table tableName="ddmall_admin">-->
-<!--            <generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
-<!--            <columnOverride column="role_ids" javaType="java.lang.Integer[]"-->
-<!--                            typeHandler="pers.huidong.ddmall.db.mybatis.JsonIntegerArrayTypeHandler"/>-->
-<!--        </table>-->
-<!--        <table tableName="ddmall_brand">-->
-<!--            <generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
-<!--        </table>-->
-<!--        <table tableName="ddmall_cart">-->
-<!--            <generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
-<!--            <columnOverride column="specifications" javaType="java.lang.String[]"-->
-<!--                            typeHandler="pers.huidong.ddmall.db.mybatis.JsonStringArrayTypeHandler"/>-->
-<!--        </table>-->
-<!--        <table tableName="ddmall_category">-->
-<!--            <generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
-<!--        </table>-->
-<!--        <table tableName="ddmall_collect">-->
-<!--            <generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
-<!--        </table>-->
-<!--        <table tableName="ddmall_comment">-->
-<!--            <generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
-<!--            <columnOverride column="pic_urls" javaType="java.lang.String[]"-->
-<!--                            typeHandler="pers.huidong.ddmall.db.mybatis.JsonStringArrayTypeHandler"/>-->
-<!--        </table>-->
-
-<!--        <table tableName="ddmall_feedback">-->
-<!--            <generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
-<!--            <columnOverride column="pic_urls" javaType="java.lang.String[]"-->
-<!--                            typeHandler="pers.huidong.ddmall.db.mybatis.JsonStringArrayTypeHandler"/>-->
-<!--        </table>-->
-
-<!--        <table tableName="ddmall_footprint">-->
-<!--            <generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
-<!--        </table>-->
-<!--        <table tableName="ddmall_goods">-->
-<!--            <generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
-<!--            <columnOverride column="gallery" javaType="java.lang.String[]"-->
-<!--                            typeHandler="pers.huidong.ddmall.db.mybatis.JsonStringArrayTypeHandler"/>-->
-<!--        </table>-->
-<!--        <table tableName="ddmall_goods_attribute">-->
-<!--            <generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
-<!--        </table>-->
-<!--        <table tableName="ddmall_goods_specification">-->
-<!--            <generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
-<!--        </table>-->
-<!--        <table tableName="ddmall_goods_product">-->
-<!--            <generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
-<!--            <columnOverride column="specifications" javaType="java.lang.String[]"-->
-<!--                            typeHandler="pers.huidong.ddmall.db.mybatis.JsonStringArrayTypeHandler"/>-->
-<!--        </table>-->
-<!--        <table tableName="ddmall_issue">-->
-<!--            <generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
-<!--        </table>-->
-<!--        <table tableName="ddmall_keyword">-->
-<!--            <generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
-<!--        </table>-->
-<!--        <table tableName="ddmall_order">-->
-<!--            <generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
-<!--        </table>-->
-<!--        <table tableName="ddmall_order_goods">-->
-<!--            <generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
-<!--            <columnOverride column="specifications" javaType="java.lang.String[]"-->
-<!--                            typeHandler="pers.huidong.ddmall.db.mybatis.JsonStringArrayTypeHandler"/>-->
-<!--            <columnOverride column="comments" javaType="java.lang.Integer[]"-->
-<!--                            typeHandler="pers.huidong.ddmall.db.mybatis.JsonIntegerArrayTypeHandler"/>-->
-
-<!--        </table>-->
-<!--        <table tableName="ddmall_region">-->
-<!--            <generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
-<!--        </table>-->
-<!--        <table tableName="ddmall_search_history">-->
-<!--            <generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
-<!--        </table>-->
-<!--        <table tableName="ddmall_storage">-->
-<!--            <generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
-<!--        </table>-->
-<!--        <table tableName="ddmall_topic">-->
-<!--            <generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
-<!--            <columnOverride column="goods" javaType="java.lang.Integer[]"-->
-<!--                            typeHandler="pers.huidong.ddmall.db.mybatis.JsonIntegerArrayTypeHandler"/>-->
-<!--        </table>-->
+        <!--        generatedKey的意义是，调用mapper插入一条数据到数据库之后，能从当前这个Entity中获取到插入之后的Id,如下：-->
         <table tableName="ddmall_user">
             <generatedKey column="id" sqlStatement="MySql" identity="true"/>
         </table>
-<!--        <table tableName="ddmall_system">-->
-<!--            <generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
-<!--        </table>-->
+        <!--        <table tableName="ddmall_ad">-->
+        <!--            <generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
+        <!--        </table>-->
+        <!--        <table tableName="ddmall_address">-->
+        <!--            <generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
+        <!--        </table>-->
+        <!--        <table tableName="ddmall_admin">-->
+        <!--            <generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
+        <!--            <columnOverride column="role_ids" javaType="java.lang.Integer[]"-->
+        <!--                            typeHandler="pers.huidong.ddmall.db.mybatis.JsonIntegerArrayTypeHandler"/>-->
+        <!--        </table>-->
+        <!--        <table tableName="ddmall_brand">-->
+        <!--            <generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
+        <!--        </table>-->
+        <!--        <table tableName="ddmall_cart">-->
+        <!--            <generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
+        <!--            <columnOverride column="specifications" javaType="java.lang.String[]"-->
+        <!--                            typeHandler="pers.huidong.ddmall.db.mybatis.JsonStringArrayTypeHandler"/>-->
+        <!--        </table>-->
+        <!--        <table tableName="ddmall_category">-->
+        <!--            <generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
+        <!--        </table>-->
+        <!--        <table tableName="ddmall_collect">-->
+        <!--            <generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
+        <!--        </table>-->
+        <!--        <table tableName="ddmall_comment">-->
+        <!--            <generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
+        <!--            <columnOverride column="pic_urls" javaType="java.lang.String[]"-->
+        <!--                            typeHandler="pers.huidong.ddmall.db.mybatis.JsonStringArrayTypeHandler"/>-->
+        <!--        </table>-->
 
-<!--        <table tableName="ddmall_groupon_rules">-->
-<!--            <generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
-<!--        </table>-->
-<!--        <table tableName="ddmall_groupon">-->
-<!--            <generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
-<!--        </table>-->
-<!--        <table tableName="ddmall_coupon">-->
-<!--            <generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
-<!--            <columnOverride column="goods_value" javaType="java.lang.Integer[]"-->
-<!--                            typeHandler="pers.huidong.ddmall.db.mybatis.JsonIntegerArrayTypeHandler"/>-->
-<!--        </table>-->
-<!--        <table tableName="ddmall_coupon_user">-->
-<!--            <generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
-<!--        </table>-->
-<!--        <table tableName="ddmall_role">-->
-<!--            <generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
-<!--        </table>-->
-<!--        <table tableName="ddmall_permission">-->
-<!--            <generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
-<!--        </table>-->
-<!--        <table tableName="ddmall_log">-->
-<!--            <generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
-<!--        </table>-->
-<!--        <table tableName="ddmall_notice">-->
-<!--            <generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
-<!--        </table>-->
-<!--        <table tableName="ddmall_notice_admin">-->
-<!--            <generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
-<!--        </table>-->
-<!--        <table tableName="ddmall_aftersale">-->
-<!--            <generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
-<!--            <columnOverride column="pictures" javaType="java.lang.String[]"-->
-<!--                            typeHandler="pers.huidong.ddmall.db.mybatis.JsonStringArrayTypeHandler"/>-->
-<!--        </table>-->
+        <!--        <table tableName="ddmall_feedback">-->
+        <!--            <generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
+        <!--            <columnOverride column="pic_urls" javaType="java.lang.String[]"-->
+        <!--                            typeHandler="pers.huidong.ddmall.db.mybatis.JsonStringArrayTypeHandler"/>-->
+        <!--        </table>-->
+
+        <!--        <table tableName="ddmall_footprint">-->
+        <!--            <generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
+        <!--        </table>-->
+        <!--        <table tableName="ddmall_goods">-->
+        <!--            <generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
+        <!--            <columnOverride column="gallery" javaType="java.lang.String[]"-->
+        <!--                            typeHandler="pers.huidong.ddmall.db.mybatis.JsonStringArrayTypeHandler"/>-->
+        <!--        </table>-->
+        <!--        <table tableName="ddmall_goods_attribute">-->
+        <!--            <generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
+        <!--        </table>-->
+        <!--        <table tableName="ddmall_goods_specification">-->
+        <!--            <generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
+        <!--        </table>-->
+        <!--        <table tableName="ddmall_goods_product">-->
+        <!--            <generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
+        <!--            <columnOverride column="specifications" javaType="java.lang.String[]"-->
+        <!--                            typeHandler="pers.huidong.ddmall.db.mybatis.JsonStringArrayTypeHandler"/>-->
+        <!--        </table>-->
+        <!--        <table tableName="ddmall_issue">-->
+        <!--            <generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
+        <!--        </table>-->
+        <!--        <table tableName="ddmall_keyword">-->
+        <!--            <generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
+        <!--        </table>-->
+        <!--        <table tableName="ddmall_order">-->
+        <!--            <generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
+        <!--        </table>-->
+        <!--        <table tableName="ddmall_order_goods">-->
+        <!--            <generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
+        <!--            <columnOverride column="specifications" javaType="java.lang.String[]"-->
+        <!--                            typeHandler="pers.huidong.ddmall.db.mybatis.JsonStringArrayTypeHandler"/>-->
+        <!--            <columnOverride column="comments" javaType="java.lang.Integer[]"-->
+        <!--                            typeHandler="pers.huidong.ddmall.db.mybatis.JsonIntegerArrayTypeHandler"/>-->
+
+        <!--        </table>-->
+        <!--        <table tableName="ddmall_region">-->
+        <!--            <generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
+        <!--        </table>-->
+        <!--        <table tableName="ddmall_search_history">-->
+        <!--            <generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
+        <!--        </table>-->
+        <!--        <table tableName="ddmall_storage">-->
+        <!--            <generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
+        <!--        </table>-->
+        <!--        <table tableName="ddmall_topic">-->
+        <!--            <generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
+        <!--            <columnOverride column="goods" javaType="java.lang.Integer[]"-->
+        <!--                            typeHandler="pers.huidong.ddmall.db.mybatis.JsonIntegerArrayTypeHandler"/>-->
+        <!--        </table>-->
+
+        <!--        <table tableName="ddmall_system">-->
+        <!--            <generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
+        <!--        </table>-->
+
+        <!--        <table tableName="ddmall_groupon_rules">-->
+        <!--            <generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
+        <!--        </table>-->
+        <!--        <table tableName="ddmall_groupon">-->
+        <!--            <generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
+        <!--        </table>-->
+        <!--        <table tableName="ddmall_coupon">-->
+        <!--            <generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
+        <!--            <columnOverride column="goods_value" javaType="java.lang.Integer[]"-->
+        <!--                            typeHandler="pers.huidong.ddmall.db.mybatis.JsonIntegerArrayTypeHandler"/>-->
+        <!--        </table>-->
+        <!--        <table tableName="ddmall_coupon_user">-->
+        <!--            <generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
+        <!--        </table>-->
+        <!--        <table tableName="ddmall_role">-->
+        <!--            <generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
+        <!--        </table>-->
+        <!--        <table tableName="ddmall_permission">-->
+        <!--            <generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
+        <!--        </table>-->
+        <!--        <table tableName="ddmall_log">-->
+        <!--            <generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
+        <!--        </table>-->
+        <!--        <table tableName="ddmall_notice">-->
+        <!--            <generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
+        <!--        </table>-->
+        <!--        <table tableName="ddmall_notice_admin">-->
+        <!--            <generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
+        <!--        </table>-->
+        <!--        <table tableName="ddmall_aftersale">-->
+        <!--            <generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
+        <!--            <columnOverride column="pictures" javaType="java.lang.String[]"-->
+        <!--                            typeHandler="pers.huidong.ddmall.db.mybatis.JsonStringArrayTypeHandler"/>-->
+        <!--        </table>-->
     </context>
 </generatorConfiguration>
