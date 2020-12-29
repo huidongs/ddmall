@@ -20,6 +20,8 @@
         <!-- <plugin type="org.mybatis.generator.plugins.ToStringPlugin"/> -->
         <!-- 自动生成equals方法和hashcode方法 -->
         <!-- <plugin type="org.mybatis.generator.plugins.EqualsHashCodePlugin"/>-->
+        <!--不重复生成xml中内容-->
+        <plugin type="org.mybatis.generator.plugins.UnmergeableXmlMappersPlugin"/>
 
         <!-- 非官方插件 https://github.com/itfsw/mybatis-generator-plugin -->
         <!-- 查询单条数据插件 -->
