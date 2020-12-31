@@ -22,7 +22,9 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="06f64dce-df20-4034-9e25-be514b7a50b9" name="Default Changelist" comment="commit" />
+    <list default="true" id="06f64dce-df20-4034-9e25-be514b7a50b9" name="Default Changelist" comment="commit">
+      <change beforePath="$PROJECT_DIR$/ddmall-wx/project.config.json" beforeDir="false" afterPath="$PROJECT_DIR$/ddmall-wx/project.config.json" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -35,7 +37,7 @@
     <option name="generalSettings">
       <MavenGeneralSettings>
         <option name="localRepository" value="E:\Maven\repo" />
-        <option name="mavenHome" value="D:\apache-maven-3.6.3" />
+        <option name="mavenHome" value="D:\maven\apache-maven-3.6.3" />
         <option name="userSettingsFile" value="D:\apache-maven-3.6.3\conf\settings.xml" />
       </MavenGeneralSettings>
     </option>
@@ -50,6 +52,7 @@
   <component name="PropertiesComponent">
     <property name="DatabaseDriversLRU" value="mysql" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="jdk.selected.JAVA_MODULE" value="1.8" />
@@ -64,7 +67,7 @@
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.31494254" />
-    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
+    <property name="settings.editor.selected.configurable" value="MavenSettings" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -72,6 +75,15 @@
       <recent name="D:\ideaworkspace\ddmall\ddmall-db\src\main\resources\pers.huidong.ddmall.db.dao" />
       <recent name="D:\ideaworkspace\ddmall\ddmall-db" />
     </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="Application" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="ddmall-wx-api" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="pers.huidong.ddmall.wx.Application" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">
@@ -93,6 +105,7 @@
       <workItem from="1607926978751" duration="9472000" />
       <workItem from="1607994287476" duration="6204000" />
       <workItem from="1609136687612" duration="4623000" />
+      <workItem from="1609427879230" duration="1922000" />
     </task>
     <task id="LOCAL-00001" summary="commit">
       <created>1607949960353</created>
@@ -129,63 +142,5 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="commit" />
     <option name="LAST_COMMIT_MESSAGE" value="commit" />
-  </component>
-  <component name="WindowStateProjectService">
-    <state x="346" y="113" key="#Inspections" timestamp="1607927742000">
-      <screen x="0" y="0" width="1440" height="870" />
-    </state>
-    <state x="346" y="113" key="#Inspections/0.0.1440.870@0.0.1440.870" timestamp="1607927742000" />
-    <state x="97" y="276" key="#SQL_Dialects" timestamp="1607927771048">
-      <screen x="0" y="0" width="1440" height="870" />
-    </state>
-    <state x="97" y="276" key="#SQL_Dialects/0.0.1440.870@0.0.1440.870" timestamp="1607927771048" />
-    <state x="312" y="93" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1607927825710">
-      <screen x="0" y="0" width="1440" height="870" />
-    </state>
-    <state x="312" y="93" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1440.870@0.0.1440.870" timestamp="1607927825710" />
-    <state x="500" y="189" key="FileChooserDialogImpl" timestamp="1607943773528">
-      <screen x="0" y="0" width="1440" height="870" />
-    </state>
-    <state x="500" y="189" key="FileChooserDialogImpl/0.0.1440.870@0.0.1440.870" timestamp="1607943773528" />
-    <state x="592" y="332" key="Github.ShareDialog" timestamp="1607911864460">
-      <screen x="0" y="0" width="1440" height="870" />
-    </state>
-    <state x="592" y="332" key="Github.ShareDialog/0.0.1440.870@0.0.1440.870" timestamp="1607911864460" />
-    <state x="479" y="140" key="Github.UntrackedFilesDialog" timestamp="1607911887972">
-      <screen x="0" y="0" width="1440" height="870" />
-    </state>
-    <state x="479" y="140" key="Github.UntrackedFilesDialog/0.0.1440.870@0.0.1440.870" timestamp="1607911887972" />
-    <state width="1397" height="226" key="GridCell.Tab.0.bottom" timestamp="1607912052863">
-      <screen x="0" y="0" width="1440" height="870" />
-    </state>
-    <state width="1397" height="226" key="GridCell.Tab.0.bottom/0.0.1440.870@0.0.1440.870" timestamp="1607912052863" />
-    <state width="1397" height="226" key="GridCell.Tab.0.center" timestamp="1607912052863">
-      <screen x="0" y="0" width="1440" height="870" />
-    </state>
-    <state width="1397" height="226" key="GridCell.Tab.0.center/0.0.1440.870@0.0.1440.870" timestamp="1607912052863" />
-    <state width="1397" height="226" key="GridCell.Tab.0.left" timestamp="1607912052863">
-      <screen x="0" y="0" width="1440" height="870" />
-    </state>
-    <state width="1397" height="226" key="GridCell.Tab.0.left/0.0.1440.870@0.0.1440.870" timestamp="1607912052863" />
-    <state width="1397" height="226" key="GridCell.Tab.0.right" timestamp="1607912052863">
-      <screen x="0" y="0" width="1440" height="870" />
-    </state>
-    <state width="1397" height="226" key="GridCell.Tab.0.right/0.0.1440.870@0.0.1440.870" timestamp="1607912052863" />
-    <state x="381" y="148" key="NewModule_or_Project.wizard" timestamp="1607927133162">
-      <screen x="0" y="0" width="1440" height="870" />
-    </state>
-    <state x="381" y="148" key="NewModule_or_Project.wizard/0.0.1440.870@0.0.1440.870" timestamp="1607927133162" />
-    <state x="221" y="19" key="SettingsEditor" timestamp="1607927147753">
-      <screen x="0" y="0" width="1440" height="870" />
-    </state>
-    <state x="221" y="19" key="SettingsEditor/0.0.1440.870@0.0.1440.870" timestamp="1607927147753" />
-    <state x="312" y="168" key="Vcs.Push.Dialog.v2" timestamp="1608000914119">
-      <screen x="0" y="0" width="1440" height="870" />
-    </state>
-    <state x="312" y="168" key="Vcs.Push.Dialog.v2/0.0.1440.870@0.0.1440.870" timestamp="1608000914119" />
-    <state x="94" y="95" key="new project wizard" timestamp="1607907318867">
-      <screen x="0" y="0" width="1440" height="870" />
-    </state>
-    <state x="94" y="95" key="new project wizard/0.0.1440.870@0.0.1440.870" timestamp="1607907318867" />
   </component>
 </project>
