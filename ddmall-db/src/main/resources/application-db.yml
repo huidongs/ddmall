@@ -10,7 +10,7 @@ spring:
       url: jdbc:mysql://rm-uf60cb427hat3ys25fo.mysql.rds.aliyuncs.com:3306/ddmall?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC&allowPublicKeyRetrieval=true&verifyServerCertificate=false&useSSL=false
       driver-class-name: com.mysql.cj.jdbc.Driver
       username: ddmall
-      password: ddmall123456
+      password: ddmall@123
       # 初始化大小，最小，最大
       initial-size: 10
       max-active: 50
@@ -33,6 +33,5 @@ spring:
           enabled: false
         filter:
           stat:
-            enabled: false
 
 
