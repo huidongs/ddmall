@@ -92,7 +92,7 @@ public class JwtOperator {
      * @param claims 用户信息
      * @return token
      */
-    public String generateToken(Map<String, Object> claims) {
+    public String generateToken(Map<String,Object> claims) {
         Date createdTime = new Date();
         Date expirationTime = this.getExpirationTime();
 

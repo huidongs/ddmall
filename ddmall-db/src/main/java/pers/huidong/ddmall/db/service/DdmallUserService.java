@@ -5,9 +5,9 @@ import org.springframework.stereotype.Service;
 import pers.huidong.ddmall.db.dao.DdmallUserMapper;
 import pers.huidong.ddmall.db.domain.DdmallUser;
 import pers.huidong.ddmall.db.domain.DdmallUserExample;
-import sun.util.resources.LocaleData;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 /**
  * @USER: xhd
@@ -38,5 +38,23 @@ public class DdmallUserService {
     public int updateByUser(DdmallUser user) {
         user.setUpdateTime(LocalDateTime.now());
         return userMapper.updateByPrimaryKeySelective(user);
+    }
+
+    public List<DdmallUser> queryByUsername(String username) {
+        DdmallUserExample example = new DdmallUserExample();
+        example.or().andUsernameEqualTo(username).andDeletedEqualTo(false);
+        return userMapper.selectByExample(example);
+    }
+
+    public List<DdmallUser> queryByMobile(String mobile) {
+        DdmallUserExample example = new DdmallUserExample();
+        example.or().andMobileEqualTo(mobile).andDeletedEqualTo(false);
+        return userMapper.selectByExample(example);
+    }
+
+    public List<DdmallUser> queryByOpenId_account(String openId) {
+        DdmallUserExample example = new DdmallUserExample();
+        example.or().andWeixinOpenidEqualTo(openId).andDeletedEqualTo(false);
+        return userMapper.selectByExample(example);
     }
 }
