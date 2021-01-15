@@ -12,11 +12,12 @@ import pers.huidong.ddmall.core.util.IpUtil;
 import pers.huidong.ddmall.core.util.JacksonUtil;
 import pers.huidong.ddmall.core.util.RegexUtil;
 import pers.huidong.ddmall.core.util.ResponseUtil;
+import pers.huidong.ddmall.core.util.bcrypt.BCryptPasswordEncoder;
 import pers.huidong.ddmall.db.domain.DdmallUser;
 import pers.huidong.ddmall.db.service.DdmallUserService;
+import pers.huidong.ddmall.wx.annotation.LoginUser;
 import pers.huidong.ddmall.wx.dto.UserInfoDTO;
 import pers.huidong.ddmall.wx.dto.WxLoginInfoDTO;
-import pers.huidong.ddmall.wx.service.CaptchaCodeManager;
 import pers.huidong.ddmall.wx.util.JwtOperator;
 
 import javax.servlet.http.HttpServletRequest;
@@ -75,11 +76,11 @@ public class WxAuthController {
     public Object register(@RequestBody String body, HttpServletRequest request) {
         String username = JacksonUtil.parseString(body, "username");
         String password = JacksonUtil.parseString(body, "password");
-        String code = JacksonUtil.parseString(body, "code");
+        //String code = JacksonUtil.parseString(body, "code");
         String mobile = JacksonUtil.parseString(body, "mobile");
         // 如果是小程序注册，则必须非空,其他情况，可以为空
         String wxCode = JacksonUtil.parseString(body, "wxCode");
-        if (StringUtils.isNullOrEmpty(username) || StringUtils.isNullOrEmpty(password) || StringUtils.isNullOrEmpty(mobile) || StringUtils.isNullOrEmpty(code) || StringUtils.isNullOrEmpty(wxCode)) {
+        if (StringUtils.isNullOrEmpty(username) || StringUtils.isNullOrEmpty(password) || StringUtils.isNullOrEmpty(mobile)) {
             return ResponseUtil.badArgument();
         }
         List<DdmallUser> userList = userService.queryByUsername(username);
@@ -94,37 +95,69 @@ public class WxAuthController {
             return ResponseUtil.fail(AUTH_INVALID_MOBILE, "手机号格式不正确");
         }
         //判断验证码是否正确
-        String cacheCode = CaptchaCodeManager.getCachedCaptcha(mobile);
-        if (StringUtils.isNullOrEmpty(cacheCode) || !cacheCode.equals(code)) {
-            return ResponseUtil.fail(AUTH_CAPTCHA_UNMATCH, "验证码错误");
-        }
+//        String cacheCode = CaptchaCodeManager.getCachedCaptcha(mobile);
+//        if (StringUtils.isNullOrEmpty(cacheCode) || !cacheCode.equals(code)) {
+//            return ResponseUtil.fail(AUTH_CAPTCHA_UNMATCH, "验证码错误");
+//        }
         String openId = "";
-        // 非空，则是小程序注册
-        // 继续验证openid
-        if (!StringUtils.isNullOrEmpty(wxCode)){
+        // 非空，则是小程序注册,继续验证openid
+        if (!StringUtils.isNullOrEmpty(wxCode)) {
             try {
                 WxMaJscode2SessionResult result = this.wxService.getUserService().getSessionInfo(wxCode);
                 openId = result.getOpenid();
             } catch (WxErrorException e) {
                 e.printStackTrace();
-                return ResponseUtil.fail(AUTH_OPENID_UNACCESS,"openId获取失败");
+                return ResponseUtil.fail(AUTH_OPENID_UNACCESS, "openId获取失败");
             }
             userList = userService.queryByOpenId_account(openId);
-            if (userList.size()>1){
+            if (userList.size() > 1) {
                 return ResponseUtil.serious();
             }
-            if (userList.size()==1){
+            if (userList.size() == 1) {
                 DdmallUser checkUser = userList.get(0);
                 String checkUsername = checkUser.getUsername();
                 String checkPassword = checkUser.getPassword();
-                if (!checkUsername.equals(openId)||!checkPassword.equals(openId)){
-                    return ResponseUtil.fail(AUTH_OPENID_BINDED,"openId已绑定账号");
+                if (!checkUsername.equals(openId) || !checkPassword.equals(openId)) {
+                    return ResponseUtil.fail(AUTH_OPENID_BINDED, "openId已绑定账号");
                 }
             }
         }
-return null;
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        String encodedPassword = encoder.encode(password);
+        DdmallUser user = DdmallUser.builder()
+                .username(username)
+                .password(encodedPassword)
+                .mobile(mobile)
+                .weixinOpenid(openId)
+                .avatar("https://yanxuan.nosdn.127.net/80841d741d7fa3073e0ae27bf487339f.jpg?imageView&quality=90&thumbnail=64x64")
+                .nickname(username)
+                .gender((byte) 0)
+                .userLevel((byte) 0)
+                .status((byte) 0)
+                .lastLoginTime(LocalDateTime.now())
+                .lastLoginIp(IpUtil.getIpAddr(request))
+                .build();
+        userService.add(user);
+        //给新用户发送注册优惠券
 
-
+        //
+        UserInfoDTO userInfoDTO = UserInfoDTO.builder()
+                .nickName(username)
+                .avatarUrl(user.getAvatar())
+                .build();
+        //token
+        String token = jwtOperator.generateToken(JacksonUtil.classToMap(userInfoDTO));
+        Date expirationTime = jwtOperator.getExpirationDateFromToken(token);
+        log.info("用户{}注册成功，生成的token = {}，有效期到：{}",
+                userInfoDTO.getNickName(),
+                token,
+                expirationTime
+        );
+        //
+        Map<Object, Object> result = new HashMap<Object, Object>();
+        result.put("token", token);
+        result.put("userInfo", userInfoDTO);
+        return ResponseUtil.ok(result);
     }
 
     /**
@@ -136,7 +169,49 @@ return null;
      */
     @PostMapping("login")
     public Object login(@RequestBody String body, HttpServletRequest request) {
-        return null;
+        String username = JacksonUtil.parseString(body, "username");
+        String password = JacksonUtil.parseString(body, "password");
+        if (StringUtils.isNullOrEmpty(username) || StringUtils.isNullOrEmpty(password)) {
+            return ResponseUtil.badArgument();
+        }
+        List<DdmallUser> userList = userService.queryByUsername(username);
+        DdmallUser user = null;
+        if (userList.size() > 1) {
+            return ResponseUtil.serious();
+        } else if (userList.size() == 0) {
+            return ResponseUtil.fail(AUTH_INVALID_ACCOUNT, "账号不存在");
+        } else {
+            user = userList.get(0);
+        }
+
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        if (!encoder.matches(password, user.getPassword())) {
+            return ResponseUtil.fail(AUTH_INVALID_ACCOUNT, "账号密码不正确");
+        }
+        //更新登录情况
+        user.setLastLoginTime(LocalDateTime.now());
+        user.setLastLoginIp(IpUtil.getIpAddr(request));
+        if (userService.updateByUser(user) == 0) {
+            return ResponseUtil.updatedDataFailed();
+        }
+        //userInfoDTO
+        UserInfoDTO userInfoDTO = UserInfoDTO.builder()
+                .nickName(username)
+                .avatarUrl(user.getAvatar())
+                .build();
+        //token
+        String token = jwtOperator.generateToken(JacksonUtil.classToMap(userInfoDTO));
+        Date expirationTime = jwtOperator.getExpirationDateFromToken(token);
+        log.info("用户{}注册成功，生成的token = {}，有效期到：{}",
+                userInfoDTO.getNickName(),
+                token,
+                expirationTime
+        );
+        //
+        Map<Object, Object> result = new HashMap<Object, Object>();
+        result.put("token", token);
+        result.put("userInfo", userInfoDTO);
+        return ResponseUtil.ok(result);
     }
 
     /**
@@ -199,10 +274,39 @@ return null;
                 token,
                 expirationTime
         );
-        log.info("token:{}", token);
+        //
         Map<String, Object> result = new HashMap<String, Object>();
         result.put("token", token);
         result.put("userInfo", userInfo);
         return ResponseUtil.ok(result);
+    }
+
+    /**
+     * 账号密码重置
+     *
+     * @param body    请求内容
+     *                {
+     *                password: xxx,
+     *                mobile: xxx
+     *                code: xxx
+     *                }
+     *                其中code是手机验证码，目前还不支持手机短信验证码
+     * @param request 请求对象
+     * @return 登录结果
+     * 成功则 { errno: 0, errmsg: '成功' }
+     * 失败则 { errno: XXX, errmsg: XXX }
+     */
+    @PostMapping("reset")
+    public Object reset(@RequestBody String body, HttpServletRequest request) {
+        return null;
+    }
+
+    @PostMapping("logout")
+    public Object logout(@LoginUser Integer userId) {
+        if (userId == null) {
+            return ResponseUtil.unlogin();
+        }
+        System.out.println();
+        return ResponseUtil.ok();
     }
 }
