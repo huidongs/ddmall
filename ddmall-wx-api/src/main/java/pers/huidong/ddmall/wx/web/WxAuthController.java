@@ -8,16 +8,16 @@ import me.chanjar.weixin.common.error.WxErrorException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import pers.huidong.ddmall.core.util.IpUtil;
-import pers.huidong.ddmall.core.util.JacksonUtil;
-import pers.huidong.ddmall.core.util.RegexUtil;
-import pers.huidong.ddmall.core.util.ResponseUtil;
+import pers.huidong.ddmall.core.notify.NotifyService;
+import pers.huidong.ddmall.core.notify.NotifyType;
+import pers.huidong.ddmall.core.util.*;
 import pers.huidong.ddmall.core.util.bcrypt.BCryptPasswordEncoder;
 import pers.huidong.ddmall.db.domain.DdmallUser;
 import pers.huidong.ddmall.db.service.DdmallUserService;
 import pers.huidong.ddmall.wx.annotation.LoginUser;
 import pers.huidong.ddmall.wx.dto.UserInfoDTO;
 import pers.huidong.ddmall.wx.dto.WxLoginInfoDTO;
+import pers.huidong.ddmall.wx.service.CaptchaCodeManager;
 import pers.huidong.ddmall.wx.util.JwtOperator;
 
 import javax.servlet.http.HttpServletRequest;
@@ -45,6 +45,9 @@ public class WxAuthController {
     private WxMaService wxService;
     @Autowired
     private DdmallUserService userService;
+    @Autowired
+    private NotifyService notifyService;
+
 
     /**
      * 账号注册
@@ -279,6 +282,37 @@ public class WxAuthController {
         result.put("token", token);
         result.put("userInfo", userInfo);
         return ResponseUtil.ok(result);
+    }
+    /**
+     * 请求注册验证码
+     *
+     * TODO
+     * 这里需要一定机制防止短信验证码被滥用
+     *
+     * @param body 手机号码 { mobile }
+     * @return
+     */
+    @PostMapping("regCaptcha")
+    public Object registerCaptcha(@RequestBody String body) {
+        String phoneNumber = JacksonUtil.parseString(body, "mobile");
+        if (org.springframework.util.StringUtils.isEmpty(phoneNumber)) {
+            return ResponseUtil.badArgument();
+        }
+        if (!RegexUtil.isMobileSimple(phoneNumber)) {
+            return ResponseUtil.badArgumentValue();
+        }
+
+        if (!notifyService.isSmsEnable()) {
+            return ResponseUtil.fail(AUTH_CAPTCHA_UNSUPPORT, "小程序后台验证码服务不支持");
+        }
+        String code = CharUtil.getRandomNum(6);
+        boolean successful = CaptchaCodeManager.addToCache(phoneNumber, code);
+        if (!successful) {
+            return ResponseUtil.fail(AUTH_CAPTCHA_FREQUENCY, "验证码未超时1分钟，不能发送");
+        }
+        notifyService.notifySmsTemplate(phoneNumber, NotifyType.CAPTCHA, new String[]{code});
+
+        return ResponseUtil.ok();
     }
 
     /**

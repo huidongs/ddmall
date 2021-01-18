@@ -11,7 +11,7 @@ import com.aliyuncs.profile.DefaultProfile;
 import com.qcloud.cos.utils.Jackson;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.linlinjava.litemall.core.util.JacksonUtil;
+import pers.huidong.ddmall.core.util.JacksonUtil;
 
 import java.util.HashMap;
 import java.util.Map;
