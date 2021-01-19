@@ -28,12 +28,12 @@ ddmall:
       # 如果是腾讯云短信，则设置active的值tencent
       # 如果是阿里云短信，则设置active的值aliyun
       active: aliyun
-      sign: ddmall
+      sign: 小猪寄存
       template:
       - name: paySucceed
         templateId: 156349
       - name: captcha
-        templateId: 156433
+        templateId: SMS_210055198
       - name: ship
         templateId: 158002
       - name: refund
@@ -43,8 +43,8 @@ ddmall:
         appkey: xxxxxxxxxxxxxx
       aliyun:
         regionId: cn-hangzhou
-        accessKeyId: LTAI4G9FJMmathz2ZeRQbe3p
-        accessKeySecret: KW443AfGIkMkiJrQCKPUjb0ZktMTwm
+        accessKeyId: LTAI4G6e44Da5zcYhTkzrQBS
+        accessKeySecret: Yr17iHV3VPkH6d6COG0MXjwDIa8u5d
 
   # 快鸟物流查询配置
   express:
