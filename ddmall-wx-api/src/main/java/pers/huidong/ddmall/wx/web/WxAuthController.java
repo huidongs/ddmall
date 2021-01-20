@@ -283,6 +283,21 @@ public class WxAuthController {
         result.put("userInfo", userInfo);
         return ResponseUtil.ok(result);
     }
+
+    /**
+     * 请求验证码
+     *
+     * TODO
+     * 这里需要一定机制防止短信验证码被滥用
+     *
+     * @param body 手机号码 { mobile: xxx, type: xxx }
+     * @return
+     */
+    @PostMapping("captcha")
+    public Object captcha(@LoginUser Integer userId, @RequestBody String body){
+        return null;
+    }
+
     /**
      * 请求注册验证码
      *
@@ -316,6 +331,44 @@ public class WxAuthController {
     }
 
     /**
+     * 账号手机号码重置
+     *
+     * @param body    请求内容
+     *                {
+     *                password: xxx,
+     *                mobile: xxx
+     *                code: xxx
+     *                }
+     *                其中code是手机验证码，目前还不支持手机短信验证码
+     * @param request 请求对象
+     * @return 登录结果
+     * 成功则 { errno: 0, errmsg: '成功' }
+     * 失败则 { errno: XXX, errmsg: XXX }
+     */
+    @PostMapping("resetPhone")
+    public Object resetPhone(@LoginUser Integer userId, @RequestBody String body, HttpServletRequest request){
+        return null;
+    }
+    /**
+     * 账号信息更新
+     *
+     * @param body    请求内容
+     *                {
+     *                password: xxx,
+     *                mobile: xxx
+     *                code: xxx
+     *                }
+     *                其中code是手机验证码，目前还不支持手机短信验证码
+     * @param request 请求对象
+     * @return 登录结果
+     * 成功则 { errno: 0, errmsg: '成功' }
+     * 失败则 { errno: XXX, errmsg: XXX }
+     */
+    @PostMapping("profile")
+    public Object profile(@LoginUser Integer userId, @RequestBody String body, HttpServletRequest request){
+        return null;
+    }
+    /**
      * 账号密码重置
      *
      * @param body    请求内容
@@ -332,9 +385,49 @@ public class WxAuthController {
      */
     @PostMapping("reset")
     public Object reset(@RequestBody String body, HttpServletRequest request) {
-        return null;
+        String mobile = JacksonUtil.parseString(body,"mobile");
+        String password = JacksonUtil.parseString(body,"password");
+        String code = JacksonUtil.parseString(body,"code");
+        if (StringUtils.isNullOrEmpty(mobile)||StringUtils.isNullOrEmpty(password)||StringUtils.isNullOrEmpty(code)){
+            return ResponseUtil.badArgument();
+        }
+        //判断验证码是否错误
+        String cacheCode = CaptchaCodeManager.getCachedCaptcha(mobile);
+        if (StringUtils.isNullOrEmpty(cacheCode)||!code.equals(cacheCode)){
+            return ResponseUtil.fail(AUTH_CAPTCHA_UNMATCH,"验证码错误");
+        }
+        //修改密码
+        List<DdmallUser> userList = userService.queryByMobile(mobile);
+        DdmallUser user = null;
+        if (userList.size()>1){
+            return ResponseUtil.serious();
+        }else if (userList.size()==0){
+            return ResponseUtil.fail(AUTH_MOBILE_UNREGISTERED,"手机号未注册");
+        }else {
+            user = userList.get(0);
+        }
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        String encodePassword = encoder.encode(password);
+        user.setPassword(encodePassword);
+
+        if (userService.updateByUser(user)==0){
+            return ResponseUtil.updatedDataFailed();
+        }
+
+        return ResponseUtil.ok();
     }
 
+    /**
+     * 微信手机号码绑定
+     *
+     * @param userId
+     * @param body
+     * @return
+     */
+    @PostMapping("bindPhone")
+    public Object bindPhone(@LoginUser Integer userId, @RequestBody String body){
+        return null;
+    }
     @PostMapping("logout")
     public Object logout(@LoginUser Integer userId) {
         if (userId == null) {
@@ -342,5 +435,10 @@ public class WxAuthController {
         }
         System.out.println();
         return ResponseUtil.ok();
+    }
+
+    @GetMapping("info")
+    public Object info(@LoginUser Integer userId){
+        return null;
     }
 }

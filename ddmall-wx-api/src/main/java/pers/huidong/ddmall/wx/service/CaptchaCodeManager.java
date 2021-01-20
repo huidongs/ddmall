@@ -6,6 +6,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * 缓存系统中的验证码
+ * @author Administrator
  */
 public class CaptchaCodeManager {
     private static ConcurrentHashMap<String, CaptchaItemDTO> captchaCodeCache = new ConcurrentHashMap<>();
