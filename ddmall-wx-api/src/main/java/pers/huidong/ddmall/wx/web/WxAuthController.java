@@ -439,6 +439,17 @@ public class WxAuthController {
 
     @GetMapping("info")
     public Object info(@LoginUser Integer userId){
-        return null;
+        if (userId == null) {
+            return ResponseUtil.unlogin();
+        }
+
+        DdmallUser user = userService.findById(userId);
+        Map<Object, Object> data = new HashMap<Object, Object>();
+        data.put("nickName", user.getNickname());
+        data.put("avatar", user.getAvatar());
+        data.put("gender", user.getGender());
+        data.put("mobile", user.getMobile());
+
+        return ResponseUtil.ok(data);
     }
 }
