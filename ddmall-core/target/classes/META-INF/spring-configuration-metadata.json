@@ -1,0 +1,59 @@
+{
+  "groups": [
+    {
+      "name": "ddmall.notify",
+      "type": "pers.huidong.ddmall.core.notify.config.NotifyProperties",
+      "sourceType": "pers.huidong.ddmall.core.notify.config.NotifyProperties"
+    },
+    {
+      "name": "ddmall.notify.mail",
+      "type": "pers.huidong.ddmall.core.notify.config.NotifyProperties$Mail",
+      "sourceType": "pers.huidong.ddmall.core.notify.config.NotifyProperties",
+      "sourceMethod": "getMail()"
+    },
+    {
+      "name": "ddmall.notify.sms",
+      "type": "pers.huidong.ddmall.core.notify.config.NotifyProperties$Sms",
+      "sourceType": "pers.huidong.ddmall.core.notify.config.NotifyProperties",
+      "sourceMethod": "getSms()"
+    },
+    {
+      "name": "ddmall.wx",
+      "type": "pers.huidong.ddmall.core.config.WxProperties",
+      "sourceType": "pers.huidong.ddmall.core.config.WxProperties"
+    }
+  ],
+  "properties": [
+    {
+      "name": "ddmall.wx.app-id",
+      "type": "java.lang.String",
+      "sourceType": "pers.huidong.ddmall.core.config.WxProperties"
+    },
+    {
+      "name": "ddmall.wx.app-secret",
+      "type": "java.lang.String",
+      "sourceType": "pers.huidong.ddmall.core.config.WxProperties"
+    },
+    {
+      "name": "ddmall.wx.key-path",
+      "type": "java.lang.String",
+      "sourceType": "pers.huidong.ddmall.core.config.WxProperties"
+    },
+    {
+      "name": "ddmall.wx.mch-id",
+      "type": "java.lang.String",
+      "sourceType": "pers.huidong.ddmall.core.config.WxProperties"
+    },
+    {
+      "name": "ddmall.wx.mch-key",
+      "type": "java.lang.String",
+      "sourceType": "pers.huidong.ddmall.core.config.WxProperties"
+    },
+    {
+      "name": "ddmall.wx.notify-url",
+      "type": "java.lang.String",
+      "sourceType": "pers.huidong.ddmall.core.config.WxProperties"
+    }
+  ],
+  "hints": []
+}
