@@ -2,8 +2,8 @@ package pers.huidong.ddmall.db.service;
 
 import com.github.pagehelper.PageHelper;
 
+import org.springframework.stereotype.Service;
 import pers.huidong.ddmall.db.dao.DdmallGoodsMapper;
-import pers.huidong.ddmall.db.domain.DdmallCategory;
 import pers.huidong.ddmall.db.domain.DdmallGoods;
 import pers.huidong.ddmall.db.domain.DdmallGoods.Column;
 import pers.huidong.ddmall.db.domain.DdmallGoodsExample;
@@ -16,6 +16,7 @@ import java.util.List;
  * @DATE: 2021-01-22
  * @Desc:
  */
+@Service
 public class DdmallGoodsService {
     Column[] columns = new Column[]{Column.id, Column.name, Column.brief, Column.picUrl, Column.isHot, Column.isNew, Column.counterPrice, Column.retailPrice};
     @Resource
@@ -65,5 +66,16 @@ public class DdmallGoodsService {
         PageHelper.startPage(offset, limit);
 
         return goodsMapper.selectByExampleSelective(example, columns);
+    }
+    /**
+     * 获取某个商品信息,包含完整信息
+     *
+     * @param goodsId
+     * @return
+     */
+    public DdmallGoods findById(Integer goodsId) {
+        DdmallGoodsExample example = new DdmallGoodsExample();
+        example.or().andIdEqualTo(goodsId).andDeletedEqualTo(false);
+        return goodsMapper.selectOneByExampleWithBLOBs(example);
     }
 }

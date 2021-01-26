@@ -1,5 +1,6 @@
 package pers.huidong.ddmall.db.service;
 
+import org.springframework.stereotype.Service;
 import pers.huidong.ddmall.db.dao.DdmallSystemMapper;
 import pers.huidong.ddmall.db.domain.DdmallSystem;
 import pers.huidong.ddmall.db.domain.DdmallSystemExample;
@@ -15,7 +16,8 @@ import java.util.Map;
  * @DATE: 2021-01-25
  * @Desc:
  */
-public class DDMALLSystemConfigService {
+@Service
+public class DdmallSystemConfigService {
     @Resource
     private DdmallSystemMapper systemMapper;
 

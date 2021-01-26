@@ -1,10 +1,18 @@
 package pers.huidong.ddmall.db.domain;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
-
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 /**
  * Database Table Remarks:
  *   优惠券信息及规则表

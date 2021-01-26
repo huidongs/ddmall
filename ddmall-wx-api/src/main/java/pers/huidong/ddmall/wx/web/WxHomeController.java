@@ -7,12 +7,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import pers.huidong.ddmall.core.system.SystemConfig;
 import pers.huidong.ddmall.core.util.ResponseUtil;
-import pers.huidong.ddmall.db.domain.DdmallAd;
 import pers.huidong.ddmall.db.domain.DdmallCategory;
 import pers.huidong.ddmall.db.domain.DdmallGoods;
 import pers.huidong.ddmall.db.service.*;
 import pers.huidong.ddmall.wx.annotation.LoginUser;
 import pers.huidong.ddmall.wx.service.HomeCacheManager;
+import pers.huidong.ddmall.wx.service.WxGrouponRuleService;
 
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
@@ -153,6 +153,8 @@ public class WxHomeController {
     private List<Map> getCategoryList() {
         List<Map> categoryList = new ArrayList<>();
         List<DdmallCategory> catL1List = categoryService.queryL1WithoutRecommend(0, SystemConfig.getCatlogListLimit());
+        System.out.println("========catL1List=========");
+        System.out.println(catL1List);
         for (DdmallCategory catL1 : catL1List) {
             List<DdmallCategory> catL2List = categoryService.queryByPid(catL1.getId());
             List<Integer> l2List = new ArrayList<>();
@@ -173,6 +175,8 @@ public class WxHomeController {
             catGoods.put("goodsList", categoryGoods);
             categoryList.add(catGoods);
         }
+        System.out.println("========categoryList=========");
+        System.out.println(categoryList);
         return categoryList;
     }
     /**

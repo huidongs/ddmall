@@ -1,6 +1,7 @@
 package pers.huidong.ddmall.db.service;
 
 import com.github.pagehelper.PageHelper;
+import org.springframework.stereotype.Service;
 import pers.huidong.ddmall.db.dao.DdmallCategoryMapper;
 import pers.huidong.ddmall.db.domain.DdmallCategory;
 import pers.huidong.ddmall.db.domain.DdmallCategoryExample;
@@ -13,6 +14,7 @@ import java.util.List;
  * @DATE: 2021-01-22
  * @Desc:
  */
+@Service
 public class DdmallCategoryService {
     @Resource
     private DdmallCategoryMapper categoryMapper;
@@ -20,12 +22,12 @@ public class DdmallCategoryService {
 
     public List<DdmallCategory> queryL1WithoutRecommend(int offset,int limit) {
         DdmallCategoryExample example = new DdmallCategoryExample();
-        example.or().andLevelEqualTo("L1").andNameEqualTo("推荐").andDeletedEqualTo(false);
+        example.or().andLevelEqualTo("L1").andNameNotEqualTo("推荐").andDeletedEqualTo(false);
         PageHelper.startPage(offset,limit);
         return categoryMapper.selectByExample(example);
     }
 
-    public List queryChannel() {
+    public List<DdmallCategory> queryChannel() {
         DdmallCategoryExample example = new DdmallCategoryExample();
         example.or().andLevelEqualTo("L1").andDeletedEqualTo(false);
         return categoryMapper.selectByExampleSelective(example,CHANNEL);

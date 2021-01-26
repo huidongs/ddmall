@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
 import pers.huidong.ddmall.core.util.SystemInfoPrinter;
-import pers.huidong.ddmall.db.service.DDMALLSystemConfigService;
 
 import javax.annotation.PostConstruct;
 import java.util.HashMap;
@@ -58,7 +57,7 @@ class SystemInistService {
     }
 
     @Autowired
-    private pers.huidong.ddmall.db.service.DDMALLSystemConfigService DDMALLSystemConfigService;
+    private pers.huidong.ddmall.db.service.DdmallSystemConfigService DDMALLSystemConfigService;
 
     private void initConfigs() {
         // 1. 读取数据库全部配置信息
