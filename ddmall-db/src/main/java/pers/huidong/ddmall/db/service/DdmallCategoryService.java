@@ -39,4 +39,14 @@ public class DdmallCategoryService {
         example.or().andPidEqualTo(pid).andDeletedEqualTo(false);
         return categoryMapper.selectByExample(example);
     }
+
+    public List<DdmallCategory> queryL1() {
+        DdmallCategoryExample example = new DdmallCategoryExample();
+        example.or().andLevelEqualTo("L1").andDeletedEqualTo(false);
+        return categoryMapper.selectByExample(example);
+    }
+
+    public DdmallCategory findById(Integer id) {
+        return categoryMapper.selectByPrimaryKey(id);
+    }
 }

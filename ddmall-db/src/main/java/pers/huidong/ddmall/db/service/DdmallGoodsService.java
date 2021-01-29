@@ -78,4 +78,15 @@ public class DdmallGoodsService {
         example.or().andIdEqualTo(goodsId).andDeletedEqualTo(false);
         return goodsMapper.selectOneByExampleWithBLOBs(example);
     }
+
+    /**
+     * 获取所有在售物品总数
+     *
+     * @return
+     */
+    public Integer queryOnSale() {
+        DdmallGoodsExample example = new DdmallGoodsExample();
+        example.or().andIsOnSaleEqualTo(true).andDeletedEqualTo(false);
+        return (int) goodsMapper.countByExample(example);
+    }
 }
