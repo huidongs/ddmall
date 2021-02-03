@@ -49,4 +49,10 @@ public class DdmallCategoryService {
     public DdmallCategory findById(Integer id) {
         return categoryMapper.selectByPrimaryKey(id);
     }
+
+    public List<DdmallCategory> queryL2ByIds(List<Integer> goodsCatIds) {
+        DdmallCategoryExample example = new DdmallCategoryExample();
+        example.or().andIdIn(goodsCatIds).andLevelEqualTo("L2").andDeletedEqualTo(false);
+        return categoryMapper.selectByExample(example);
+    }
 }

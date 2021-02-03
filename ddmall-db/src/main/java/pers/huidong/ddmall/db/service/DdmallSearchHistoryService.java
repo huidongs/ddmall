@@ -6,6 +6,7 @@ import pers.huidong.ddmall.db.domain.DdmallSearchHistory;
 import pers.huidong.ddmall.db.domain.DdmallSearchHistoryExample;
 
 import javax.annotation.Resource;
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -23,5 +24,17 @@ public class DdmallSearchHistoryService {
         example.or().andUserIdEqualTo(uid).andDeletedEqualTo(false);
         example.setDistinct(true);
         return searchHistoryMapper.selectByExampleSelective(example, DdmallSearchHistory.Column.keyword);
+    }
+
+    public void deleteByUid(Integer userId) {
+        DdmallSearchHistoryExample example = new DdmallSearchHistoryExample();
+        example.or().andUserIdEqualTo(userId);
+        searchHistoryMapper.logicalDeleteByExample(example);
+    }
+
+    public void save(DdmallSearchHistory searchHistoryVo) {
+        searchHistoryVo.setAddTime(LocalDateTime.now());
+        searchHistoryVo.setUpdateTime(LocalDateTime.now());
+        searchHistoryMapper.insertSelective(searchHistoryVo);
     }
 }

@@ -18,6 +18,7 @@ import java.util.Arrays;
  */
 @Data
 @Builder
+@NoArgsConstructor
 @AllArgsConstructor
 public class DdmallSearchHistory {
     /**

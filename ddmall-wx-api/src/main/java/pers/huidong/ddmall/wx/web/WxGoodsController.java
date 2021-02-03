@@ -18,6 +18,7 @@ import pers.huidong.ddmall.db.domain.DdmallGoods;
 import pers.huidong.ddmall.db.domain.DdmallSearchHistory;
 import pers.huidong.ddmall.db.service.DdmallCategoryService;
 import pers.huidong.ddmall.db.service.DdmallGoodsService;
+import pers.huidong.ddmall.db.service.DdmallSearchHistoryService;
 import pers.huidong.ddmall.wx.annotation.LoginUser;
 
 import javax.validation.constraints.NotNull;
@@ -41,6 +42,8 @@ public class WxGoodsController {
     private DdmallGoodsService goodsService;
     @Autowired
     private DdmallCategoryService categoryService;
+    @Autowired
+    private DdmallSearchHistoryService searchHistoryService;
     /**
      * 根据条件搜素商品
      * <p>
