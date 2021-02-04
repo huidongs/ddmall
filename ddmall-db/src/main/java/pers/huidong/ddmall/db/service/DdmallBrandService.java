@@ -34,4 +34,8 @@ public class DdmallBrandService {
     public List query(Integer page, Integer limit) {
         return query(page, limit, null, null);
     }
+
+    public DdmallBrand findById(Integer id) {
+        return brandMapper.selectByPrimaryKey(id);
+    }
 }
