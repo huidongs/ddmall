@@ -13,12 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import pers.huidong.ddmall.core.util.ResponseUtil;
-import pers.huidong.ddmall.db.domain.DdmallCategory;
-import pers.huidong.ddmall.db.domain.DdmallGoods;
-import pers.huidong.ddmall.db.domain.DdmallSearchHistory;
-import pers.huidong.ddmall.db.service.DdmallCategoryService;
-import pers.huidong.ddmall.db.service.DdmallGoodsService;
-import pers.huidong.ddmall.db.service.DdmallSearchHistoryService;
+import pers.huidong.ddmall.db.domain.*;
+import pers.huidong.ddmall.db.service.*;
 import pers.huidong.ddmall.wx.annotation.LoginUser;
 
 import javax.validation.constraints.NotNull;
@@ -26,6 +22,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.*;
 
 /**
  * @USER: xhd
@@ -44,6 +41,163 @@ public class WxGoodsController {
     private DdmallCategoryService categoryService;
     @Autowired
     private DdmallSearchHistoryService searchHistoryService;
+
+    @Autowired
+    private DdmallGoodsProductService productService;
+
+    @Autowired
+    private DdmallIssueService goodsIssueService;
+
+    @Autowired
+    private DdmallGoodsAttributeService goodsAttributeService;
+
+    @Autowired
+    private DdmallBrandService brandService;
+
+    @Autowired
+    private DdmallCommentService commentService;
+
+    @Autowired
+    private DdmallUserService userService;
+
+    @Autowired
+    private DdmallCollectService collectService;
+
+    @Autowired
+    private DdmallFootprintService footprintService;
+    
+    @Autowired
+    private DdmallGoodsSpecificationService goodsSpecificationService;
+
+    @Autowired
+    private DdmallGrouponRulesService rulesService;
+
+    private final static ArrayBlockingQueue<Runnable> WORK_QUEUE = new ArrayBlockingQueue<>(9);
+
+    private final static RejectedExecutionHandler HANDLER = new ThreadPoolExecutor.CallerRunsPolicy();
+
+    private static ThreadPoolExecutor executorService = new ThreadPoolExecutor(16, 16, 1000, TimeUnit.MILLISECONDS, WORK_QUEUE, HANDLER);
+
+    /**
+     * 商品详情
+     * <p>
+     * 用户可以不登录。
+     * 如果用户登录，则记录用户足迹以及返回用户收藏信息。
+     *
+     * @param userId 用户ID
+     * @param id     商品ID
+     * @return 商品详情
+     */
+    @GetMapping("detail")
+    public Object detail(@LoginUser Integer userId, @NotNull Integer id) {
+        // 商品信息
+        DdmallGoods info = goodsService.findById(id);
+
+        // 商品属性
+        Callable<List> goodsAttributeListCallable = () -> goodsAttributeService.queryByGid(id);
+
+        // 商品规格 返回的是定制的GoodsSpecificationVo
+        Callable<Object> objectCallable = () -> goodsSpecificationService.getSpecificationVoList(id);
+
+        // 商品规格对应的数量和价格
+        Callable<List> productListCallable = () -> productService.queryByGid(id);
+
+        // 商品问题，这里是一些通用问题
+        Callable<List> issueCallable = () -> goodsIssueService.querySelective("", 1, 4, "", "");
+
+        // 商品品牌商
+        Callable<DdmallBrand> brandCallable = ()->{
+            Integer brandId = info.getBrandId();
+            DdmallBrand brand;
+            if (brandId == 0) {
+                brand = new DdmallBrand();
+            } else {
+                brand = brandService.findById(info.getBrandId());
+            }
+            return brand;
+        };
+
+        // 评论
+        Callable<Map> commentsCallable = () -> {
+            List<DdmallComment> comments = commentService.queryGoodsByGid(id, 0, 2);
+            List<Map<String, Object>> commentsVo = new ArrayList<>(comments.size());
+            long commentCount = PageInfo.of(comments).getTotal();
+            for (DdmallComment comment : comments) {
+                Map<String, Object> c = new HashMap<>();
+                c.put("id", comment.getId());
+                c.put("addTime", comment.getAddTime());
+                c.put("content", comment.getContent());
+                c.put("adminContent", comment.getAdminContent());
+                DdmallUser user = userService.findById(comment.getUserId());
+                c.put("nickname", user == null ? "" : user.getNickname());
+                c.put("avatar", user == null ? "" : user.getAvatar());
+                c.put("picList", comment.getPicUrls());
+                commentsVo.add(c);
+            }
+            Map<String, Object> commentList = new HashMap<>();
+            commentList.put("count", commentCount);
+            commentList.put("data", commentsVo);
+            return commentList;
+        };
+
+        //团购信息
+        Callable<List> grouponRulesCallable = () ->rulesService.queryByGoodsId(id);
+
+        // 用户收藏
+        int userHasCollect = 0;
+        if (userId != null) {
+            userHasCollect = collectService.count(userId, id);
+        }
+
+        // 记录用户的足迹 异步处理
+        if (userId != null) {
+            executorService.execute(()->{
+                DdmallFootprint footprint = new DdmallFootprint();
+                footprint.setUserId(userId);
+                footprint.setGoodsId(id);
+                footprintService.add(footprint);
+            });
+        }
+        FutureTask<List> goodsAttributeListTask = new FutureTask<>(goodsAttributeListCallable);
+        FutureTask<Object> objectCallableTask = new FutureTask<>(objectCallable);
+        FutureTask<List> productListCallableTask = new FutureTask<>(productListCallable);
+        FutureTask<List> issueCallableTask = new FutureTask<>(issueCallable);
+        FutureTask<Map> commentsCallableTsk = new FutureTask<>(commentsCallable);
+        FutureTask<DdmallBrand> brandCallableTask = new FutureTask<>(brandCallable);
+        FutureTask<List> grouponRulesCallableTask = new FutureTask<>(grouponRulesCallable);
+
+        executorService.submit(goodsAttributeListTask);
+        executorService.submit(objectCallableTask);
+        executorService.submit(productListCallableTask);
+        executorService.submit(issueCallableTask);
+        executorService.submit(commentsCallableTsk);
+        executorService.submit(brandCallableTask);
+        executorService.submit(grouponRulesCallableTask);
+
+        Map<String, Object> data = new HashMap<>();
+
+        try {
+            data.put("info", info);
+            data.put("userHasCollect", userHasCollect);
+            data.put("issue", issueCallableTask.get());
+            data.put("comment", commentsCallableTsk.get());
+            data.put("specificationList", objectCallableTask.get());
+            data.put("productList", productListCallableTask.get());
+            data.put("attribute", goodsAttributeListTask.get());
+            data.put("brand", brandCallableTask.get());
+            data.put("groupon", grouponRulesCallableTask.get());
+            //SystemConfig.isAutoCreateShareImage()
+            data.put("share", SystemConfig.isAutoCreateShareImage());
+
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        //商品分享图片地址
+        data.put("shareImage", info.getShareUrl());
+        return ResponseUtil.ok(data);
+    }
     /**
      * 根据条件搜素商品
      * <p>

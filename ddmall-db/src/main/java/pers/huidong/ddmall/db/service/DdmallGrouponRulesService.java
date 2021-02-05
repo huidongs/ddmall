@@ -43,4 +43,13 @@ public class DdmallGrouponRulesService {
         PageHelper.startPage(page, limit);
         return mapper.selectByExample(example);
     }
+    /**
+     * 根据ID查找对应团购项
+     *
+     * @param id
+     * @return
+     */
+    public DdmallGrouponRules findById(Integer id) {
+        return mapper.selectByPrimaryKey(id);
+    }
 }

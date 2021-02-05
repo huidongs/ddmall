@@ -36,7 +36,7 @@ public class WxGrouponRuleService {
     }
     public List<GrouponRuleVo> queryList(Integer page, Integer size, String sort, String order) {
         Page<DdmallGrouponRules> grouponRulesList = (Page<DdmallGrouponRules>)grouponRulesService.queryList(page, size, sort, order);
-
+        System.out.println("grouponRulesList{}"+grouponRulesList);
         Page<GrouponRuleVo> grouponList = new Page<GrouponRuleVo>();
         grouponList.setPages(grouponRulesList.getPages());
         grouponList.setPageNum(grouponRulesList.getPageNum());
