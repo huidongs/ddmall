@@ -79,5 +79,7 @@ public class DdmallCouponService {
     }
 
 
-
+    public DdmallCoupon findById(Integer couponId) {
+        return couponMapper.selectByPrimaryKey(couponId);
+    }
 }

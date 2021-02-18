@@ -52,4 +52,16 @@ public class DdmallGrouponRulesService {
     public DdmallGrouponRules findById(Integer id) {
         return mapper.selectByPrimaryKey(id);
     }
+
+    /**
+     * 查询某个商品关联的团购规则
+     *
+     * @param goodsId
+     * @return
+     */
+    public List queryByGoodsId(Integer goodsId) {
+        DdmallGrouponRulesExample example = new DdmallGrouponRulesExample();
+        example.or().andGoodsIdEqualTo(goodsId).andStatusEqualTo(GrouponConstant.RULE_STATUS_ON).andDeletedEqualTo(false);
+        return mapper.selectByExample(example);
+    }
 }

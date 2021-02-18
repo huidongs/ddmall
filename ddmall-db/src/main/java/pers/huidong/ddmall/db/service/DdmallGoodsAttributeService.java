@@ -1,5 +1,6 @@
 package pers.huidong.ddmall.db.service;
 
+import org.springframework.stereotype.Service;
 import pers.huidong.ddmall.db.dao.DdmallGoodsAttributeMapper;
 import pers.huidong.ddmall.db.domain.DdmallGoodsAttribute;
 import pers.huidong.ddmall.db.domain.DdmallGoodsAttributeExample;
@@ -12,6 +13,7 @@ import java.util.List;
  * @DATE: 2021-02-05
  * @Desc:
  */
+@Service
 public class DdmallGoodsAttributeService {
     @Resource
     private DdmallGoodsAttributeMapper goodsAttributeMapper;

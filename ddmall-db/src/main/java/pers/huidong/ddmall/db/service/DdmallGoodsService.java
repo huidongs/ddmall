@@ -40,6 +40,22 @@ public class DdmallGoodsService {
         return goodsMapper.selectByExampleSelective(example, columns);
     }
     /**
+     * 获取分类下的商品
+     *
+     * @param catId
+     * @param offset
+     * @param limit
+     * @return
+     */
+    public List<DdmallGoods> queryByCategory(Integer catId, int offset, int limit) {
+        DdmallGoodsExample example = new DdmallGoodsExample();
+        example.or().andCategoryIdEqualTo(catId).andIsOnSaleEqualTo(true).andDeletedEqualTo(false);
+        example.setOrderByClause("add_time desc");
+        PageHelper.startPage(offset, limit);
+
+        return goodsMapper.selectByExampleSelective(example, columns);
+    }
+    /**
      * 获取新品上市
      *
      * @param offset

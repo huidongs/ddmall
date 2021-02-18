@@ -4,6 +4,7 @@ import com.github.pagehelper.PageInfo;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import pers.huidong.ddmall.core.system.SystemConfig;
 import pers.huidong.ddmall.core.validator.Order;
 import pers.huidong.ddmall.core.validator.Sort;
 import org.springframework.util.StringUtils;
@@ -290,6 +291,27 @@ public class WxGoodsController {
         data.put("brotherCategory", children);
         return ResponseUtil.ok(data);
     }
+    /**
+     * 商品详情页面“大家都在看”推荐商品
+     *
+     * @param id, 商品ID
+     * @return 商品详情页面推荐商品
+     */
+    @GetMapping("related")
+    public Object related(@NotNull Integer id) {
+        DdmallGoods goods = goodsService.findById(id);
+        if (goods == null) {
+            return ResponseUtil.badArgumentValue();
+        }
+
+        // 目前的商品推荐算法仅仅是推荐同类目的其他商品
+        int cid = goods.getCategoryId();
+        // 查找六个相关商品
+        int related = 6;
+        List<DdmallGoods> goodsList = goodsService.queryByCategory(cid, 0, related);
+        return ResponseUtil.okList(goodsList);
+    }
+
     /**
      * 在售的商品总数
      *

@@ -8,9 +8,10 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import pers.huidong.ddmall.core.system.SystemConfig;
+import pers.huidong.ddmall.core.util.JacksonUtil;
 import pers.huidong.ddmall.core.util.ResponseUtil;
-import pers.huidong.ddmall.db.domain.DdmallCart;
-import pers.huidong.ddmall.db.domain.DdmallGoods;
+import pers.huidong.ddmall.db.domain.*;
 import pers.huidong.ddmall.db.service.*;
 import pers.huidong.ddmall.wx.annotation.LoginUser;
 
@@ -19,6 +20,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import static pers.huidong.ddmall.wx.util.WxResponseCode.GOODS_NO_STOCK;
+import static pers.huidong.ddmall.wx.util.WxResponseCode.GOODS_UNSHELVE;
 
 /**
  * 用户购物车服务
