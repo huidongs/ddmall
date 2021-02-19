@@ -18,12 +18,46 @@
       "sourceMethod": "getSms()"
     },
     {
+      "name": "ddmall.storage",
+      "type": "pers.huidong.ddmall.core.storage.config.StorageProperties",
+      "sourceType": "pers.huidong.ddmall.core.storage.config.StorageProperties"
+    },
+    {
+      "name": "ddmall.storage.aliyun",
+      "type": "pers.huidong.ddmall.core.storage.config.StorageProperties$Aliyun",
+      "sourceType": "pers.huidong.ddmall.core.storage.config.StorageProperties",
+      "sourceMethod": "getAliyun()"
+    },
+    {
+      "name": "ddmall.storage.local",
+      "type": "pers.huidong.ddmall.core.storage.config.StorageProperties$Local",
+      "sourceType": "pers.huidong.ddmall.core.storage.config.StorageProperties",
+      "sourceMethod": "getLocal()"
+    },
+    {
+      "name": "ddmall.storage.qiniu",
+      "type": "pers.huidong.ddmall.core.storage.config.StorageProperties$Qiniu",
+      "sourceType": "pers.huidong.ddmall.core.storage.config.StorageProperties",
+      "sourceMethod": "getQiniu()"
+    },
+    {
+      "name": "ddmall.storage.tencent",
+      "type": "pers.huidong.ddmall.core.storage.config.StorageProperties$Tencent",
+      "sourceType": "pers.huidong.ddmall.core.storage.config.StorageProperties",
+      "sourceMethod": "getTencent()"
+    },
+    {
       "name": "ddmall.wx",
       "type": "pers.huidong.ddmall.core.config.WxProperties",
       "sourceType": "pers.huidong.ddmall.core.config.WxProperties"
     }
   ],
   "properties": [
+    {
+      "name": "ddmall.storage.active",
+      "type": "java.lang.String",
+      "sourceType": "pers.huidong.ddmall.core.storage.config.StorageProperties"
+    },
     {
       "name": "ddmall.wx.app-id",
       "type": "java.lang.String",
