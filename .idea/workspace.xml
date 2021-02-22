@@ -23,27 +23,38 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="06f64dce-df20-4034-9e25-be514b7a50b9" name="Default Changelist" comment="commit">
-      <change beforePath="$PROJECT_DIR$/ddmall-wx/project.config.json" beforeDir="false" afterPath="$PROJECT_DIR$/ddmall-wx/project.config.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ddmall-core/src/main/java/pers/huidong/ddmall/core/storage/AliyunStorage.java" beforeDir="false" afterPath="$PROJECT_DIR$/ddmall-core/src/main/java/pers/huidong/ddmall/core/storage/AliyunStorage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ddmall-core/target/classes/application-core.yml" beforeDir="false" afterPath="$PROJECT_DIR$/ddmall-core/target/classes/application-core.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="ROOT_SYNC" value="SYNC" />
   </component>
   <component name="MavenImportPreferences">
     <option name="generalSettings">
       <MavenGeneralSettings>
         <option name="localRepository" value="E:\Maven\repo" />
-        <option name="mavenHome" value="D:\maven\apache-maven-3.6.3" />
+        <option name="mavenHome" value="D:\apache-maven-3.6.3" />
         <option name="userSettingsFile" value="D:\apache-maven-3.6.3\conf\settings.xml" />
       </MavenGeneralSettings>
     </option>
   </component>
   <component name="ProjectId" id="1lcrA9GKUEap55g8UbbZfaGTZ5d" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -51,12 +62,16 @@
   </component>
   <component name="PropertiesComponent">
     <property name="DatabaseDriversLRU" value="mysql" />
+    <property name="RequestMappingsPanelOrder0" value="0" />
+    <property name="RequestMappingsPanelOrder1" value="1" />
+    <property name="RequestMappingsPanelWidth0" value="75" />
+    <property name="RequestMappingsPanelWidth1" value="75" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="jdk.selected.JAVA_MODULE" value="1.8" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/ddmall-db/mybatis-generator" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/ddmall-core/src/main/java/pers/huidong/ddmall/core" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -67,16 +82,39 @@
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.31494254" />
-    <property name="settings.editor.selected.configurable" value="MavenSettings" />
+    <property name="settings.editor.selected.configurable" value="vcs.Subversion" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\ideaworkspace\ddmall\ddmall-core\src\main\java\pers\huidong\ddmall\core" />
+      <recent name="D:\ideaworkspace\ddmall\ddmall-db\src\main\resources\pers\huidong\ddmall\db\dao" />
+      <recent name="D:\ideaworkspace\ddmall\ddmall-db\src\main\java\pers\huidong\ddmall\db" />
+      <recent name="D:\ideaworkspace\ddmall\ddmall-wx-api\src\main\java\pers\huidong\ddmall\wx\vo" />
       <recent name="D:\ideaworkspace\ddmall\ddmall-db\mybatis-generator" />
-      <recent name="D:\ideaworkspace\ddmall\ddmall-db\src\main\resources\pers.huidong.ddmall.db.dao" />
-      <recent name="D:\ideaworkspace\ddmall\ddmall-db" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="pers.huidong.ddmall.wx.web" />
+      <recent name="pers.huidong.ddmall.db.dao" />
+      <recent name="pers.huidong.ddmall.core.util" />
+    </key>
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="pers.huidong.ddmall.db.service" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Spring Boot.Application">
+    <configuration name="DemoTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="pers.huidong.test.DemoTest" />
+      <module name="ddmall-wx-api" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="pers.huidong.test.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="Application" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
       <module name="ddmall-wx-api" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="pers.huidong.ddmall.wx.Application" />
@@ -84,6 +122,11 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.DemoTest" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">
@@ -106,6 +149,19 @@
       <workItem from="1607994287476" duration="6204000" />
       <workItem from="1609136687612" duration="4623000" />
       <workItem from="1609427879230" duration="1922000" />
+      <workItem from="1611535858919" duration="16883000" />
+      <workItem from="1611622131384" duration="18689000" />
+      <workItem from="1611655504148" duration="1307000" />
+      <workItem from="1611707612632" duration="16224000" />
+      <workItem from="1611793996104" duration="11215000" />
+      <workItem from="1611907748417" duration="1243000" />
+      <workItem from="1612338836252" duration="4094000" />
+      <workItem from="1612399097977" duration="11642000" />
+      <workItem from="1612485396918" duration="308000" />
+      <workItem from="1612486699364" duration="20035000" />
+      <workItem from="1613608924274" duration="14042000" />
+      <workItem from="1613697530165" duration="13397000" />
+      <workItem from="1613781216690" duration="4161000" />
     </task>
     <task id="LOCAL-00001" summary="commit">
       <created>1607949960353</created>
@@ -121,7 +177,49 @@
       <option name="project" value="LOCAL" />
       <updated>1608000892082</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="commit">
+      <created>1611575020407</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1611575020407</updated>
+    </task>
+    <task id="LOCAL-00004" summary="commit">
+      <created>1611657846109</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1611657846109</updated>
+    </task>
+    <task id="LOCAL-00005" summary="commit">
+      <created>1611910383842</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1611910383842</updated>
+    </task>
+    <task id="LOCAL-00006" summary="品牌商页">
+      <created>1612430865963</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1612430865963</updated>
+    </task>
+    <task id="LOCAL-00007" summary="commit">
+      <created>1612517053865</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1612517053865</updated>
+    </task>
+    <task id="LOCAL-00008" summary="commit">
+      <created>1613640813434</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1613640813434</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -140,7 +238,86 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
+    <MESSAGE value="品牌商页" />
     <MESSAGE value="commit" />
     <option name="LAST_COMMIT_MESSAGE" value="commit" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="440" y="99" key="#Project_Structure" timestamp="1612425550806">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state x="440" y="99" key="#Project_Structure/0.0.1920.1050@0.0.1920.1050" timestamp="1612425550806" />
+    <state x="552" y="183" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1611541682429">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state x="552" y="183" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1050@0.0.1920.1050" timestamp="1611541682429" />
+    <state x="727" y="392" width="466" height="273" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes" timestamp="1611562085699">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state x="727" y="392" width="466" height="273" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes/0.0.1920.1050@0.0.1920.1050" timestamp="1611562085699" />
+    <state x="740" y="280" key="FileChooserDialogImpl" timestamp="1611808282976">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state x="740" y="280" key="FileChooserDialogImpl/0.0.1920.1050@0.0.1920.1050" timestamp="1611808282976" />
+    <state width="1877" height="23" key="GridCell.Tab.0.bottom" timestamp="1613812016862">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state width="1877" height="23" key="GridCell.Tab.0.bottom/0.0.1920.1050@0.0.1920.1050" timestamp="1613812016862" />
+    <state width="1877" height="23" key="GridCell.Tab.0.center" timestamp="1613812016861">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state width="1877" height="23" key="GridCell.Tab.0.center/0.0.1920.1050@0.0.1920.1050" timestamp="1613812016861" />
+    <state width="1877" height="23" key="GridCell.Tab.0.left" timestamp="1613812016861">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state width="1877" height="23" key="GridCell.Tab.0.left/0.0.1920.1050@0.0.1920.1050" timestamp="1613812016861" />
+    <state width="1877" height="23" key="GridCell.Tab.0.right" timestamp="1613812016861">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state width="1877" height="23" key="GridCell.Tab.0.right/0.0.1920.1050@0.0.1920.1050" timestamp="1613812016861" />
+    <state width="1877" height="23" key="GridCell.Tab.1.bottom" timestamp="1613812016862">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state width="1877" height="23" key="GridCell.Tab.1.bottom/0.0.1920.1050@0.0.1920.1050" timestamp="1613812016862" />
+    <state width="1877" height="23" key="GridCell.Tab.1.center" timestamp="1613812016862">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state width="1877" height="23" key="GridCell.Tab.1.center/0.0.1920.1050@0.0.1920.1050" timestamp="1613812016862" />
+    <state width="1877" height="23" key="GridCell.Tab.1.left" timestamp="1613812016862">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state width="1877" height="23" key="GridCell.Tab.1.left/0.0.1920.1050@0.0.1920.1050" timestamp="1613812016862" />
+    <state width="1877" height="23" key="GridCell.Tab.1.right" timestamp="1613812016862">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state width="1877" height="23" key="GridCell.Tab.1.right/0.0.1920.1050@0.0.1920.1050" timestamp="1613812016862" />
+    <state x="490" y="180" key="Maven.ArtifactSearchDialog" timestamp="1611797559310">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state x="490" y="180" key="Maven.ArtifactSearchDialog/0.0.1920.1050@0.0.1920.1050" timestamp="1611797559310" />
+    <state x="461" y="169" key="SettingsEditor" timestamp="1611805762693">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state x="461" y="169" key="SettingsEditor/0.0.1920.1050@0.0.1920.1050" timestamp="1611805762693" />
+    <state width="498" height="477" key="SwitcherDM" timestamp="1613629716294">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state width="498" height="477" key="SwitcherDM/0.0.1920.1050@0.0.1920.1050" timestamp="1613629716294" />
+    <state x="552" y="258" key="Vcs.Push.Dialog.v2" timestamp="1612517060835">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state x="552" y="258" key="Vcs.Push.Dialog.v2/0.0.1920.1050@0.0.1920.1050" timestamp="1612517060835" />
+    <state x="691" y="426" key="svn.sslCredentialsDialog" timestamp="1611805728360">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state x="691" y="426" key="svn.sslCredentialsDialog/0.0.1920.1050@0.0.1920.1050" timestamp="1611805728360" />
+    <state x="765" y="426" key="svn.upgradeDialog" timestamp="1611805777370">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state x="765" y="426" key="svn.upgradeDialog/0.0.1920.1050@0.0.1920.1050" timestamp="1611805777370" />
+    <state x="704" y="388" key="svn4idea.checkout.options" timestamp="1611805776221">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state x="704" y="388" key="svn4idea.checkout.options/0.0.1920.1050@0.0.1920.1050" timestamp="1611805776221" />
   </component>
 </project>
