@@ -8,7 +8,14 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="06f64dce-df20-4034-9e25-be514b7a50b9" name="Default Changelist" comment="commit" />
+    <list default="true" id="06f64dce-df20-4034-9e25-be514b7a50b9" name="Default Changelist" comment="commit">
+      <change beforePath="$PROJECT_DIR$/ddmall-vue/config/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/ddmall-vue/config/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ddmall-vue/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/ddmall-vue/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ddmall-vue/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/ddmall-vue/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ddmall-vue/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/ddmall-vue/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ddmall-vue/src/assets/scss/global.scss" beforeDir="false" afterPath="$PROJECT_DIR$/ddmall-vue/src/assets/scss/global.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ddmall-vue/src/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/ddmall-vue/src/main.js" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -98,6 +105,17 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="Application" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
       <module name="ddmall-wx-api" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="pers.huidong.ddmall.wx.Application" />
@@ -147,6 +165,7 @@
       <workItem from="1613781216690" duration="4161000" />
       <workItem from="1613978423076" duration="681000" />
       <workItem from="1613981471036" duration="113000" />
+      <workItem from="1614239624959" duration="3089000" />
     </task>
     <task id="LOCAL-00001" summary="commit">
       <created>1607949960353</created>
@@ -256,38 +275,38 @@
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
     <state x="740" y="280" key="FileChooserDialogImpl/0.0.1920.1050@0.0.1920.1050" timestamp="1613981585384" />
-    <state width="1877" height="23" key="GridCell.Tab.0.bottom" timestamp="1613812016862">
+    <state width="1877" height="279" key="GridCell.Tab.0.bottom" timestamp="1614242025886">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state width="1877" height="23" key="GridCell.Tab.0.bottom/0.0.1920.1050@0.0.1920.1050" timestamp="1613812016862" />
-    <state width="1877" height="23" key="GridCell.Tab.0.center" timestamp="1613812016861">
+    <state width="1877" height="279" key="GridCell.Tab.0.bottom/0.0.1920.1050@0.0.1920.1050" timestamp="1614242025886" />
+    <state width="1877" height="279" key="GridCell.Tab.0.center" timestamp="1614242025886">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state width="1877" height="23" key="GridCell.Tab.0.center/0.0.1920.1050@0.0.1920.1050" timestamp="1613812016861" />
-    <state width="1877" height="23" key="GridCell.Tab.0.left" timestamp="1613812016861">
+    <state width="1877" height="279" key="GridCell.Tab.0.center/0.0.1920.1050@0.0.1920.1050" timestamp="1614242025886" />
+    <state width="1877" height="279" key="GridCell.Tab.0.left" timestamp="1614242025885">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state width="1877" height="23" key="GridCell.Tab.0.left/0.0.1920.1050@0.0.1920.1050" timestamp="1613812016861" />
-    <state width="1877" height="23" key="GridCell.Tab.0.right" timestamp="1613812016861">
+    <state width="1877" height="279" key="GridCell.Tab.0.left/0.0.1920.1050@0.0.1920.1050" timestamp="1614242025885" />
+    <state width="1877" height="279" key="GridCell.Tab.0.right" timestamp="1614242025886">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state width="1877" height="23" key="GridCell.Tab.0.right/0.0.1920.1050@0.0.1920.1050" timestamp="1613812016861" />
-    <state width="1877" height="23" key="GridCell.Tab.1.bottom" timestamp="1613812016862">
+    <state width="1877" height="279" key="GridCell.Tab.0.right/0.0.1920.1050@0.0.1920.1050" timestamp="1614242025886" />
+    <state width="1877" height="279" key="GridCell.Tab.1.bottom" timestamp="1614242025886">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state width="1877" height="23" key="GridCell.Tab.1.bottom/0.0.1920.1050@0.0.1920.1050" timestamp="1613812016862" />
-    <state width="1877" height="23" key="GridCell.Tab.1.center" timestamp="1613812016862">
+    <state width="1877" height="279" key="GridCell.Tab.1.bottom/0.0.1920.1050@0.0.1920.1050" timestamp="1614242025886" />
+    <state width="1877" height="279" key="GridCell.Tab.1.center" timestamp="1614242025886">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state width="1877" height="23" key="GridCell.Tab.1.center/0.0.1920.1050@0.0.1920.1050" timestamp="1613812016862" />
-    <state width="1877" height="23" key="GridCell.Tab.1.left" timestamp="1613812016862">
+    <state width="1877" height="279" key="GridCell.Tab.1.center/0.0.1920.1050@0.0.1920.1050" timestamp="1614242025886" />
+    <state width="1877" height="279" key="GridCell.Tab.1.left" timestamp="1614242025886">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state width="1877" height="23" key="GridCell.Tab.1.left/0.0.1920.1050@0.0.1920.1050" timestamp="1613812016862" />
-    <state width="1877" height="23" key="GridCell.Tab.1.right" timestamp="1613812016862">
+    <state width="1877" height="279" key="GridCell.Tab.1.left/0.0.1920.1050@0.0.1920.1050" timestamp="1614242025886" />
+    <state width="1877" height="279" key="GridCell.Tab.1.right" timestamp="1614242025886">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state width="1877" height="23" key="GridCell.Tab.1.right/0.0.1920.1050@0.0.1920.1050" timestamp="1613812016862" />
+    <state width="1877" height="279" key="GridCell.Tab.1.right/0.0.1920.1050@0.0.1920.1050" timestamp="1614242025886" />
     <state x="490" y="180" key="Maven.ArtifactSearchDialog" timestamp="1611797559310">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
