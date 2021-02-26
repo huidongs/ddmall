@@ -4,7 +4,7 @@ import Vue from 'vue';
 import App from './App.vue';
 import router from './router';
 import 'vant/lib/icon/local.css';
-// import '@/assets/scss/global.scss';
+import '@/assets/scss/global.scss';
 import '@/assets/scss/iconfont/iconfont.css';
 
 import VueCountdown from '@chenfengyuan/vue-countdown';
