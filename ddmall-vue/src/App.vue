@@ -1,15 +1,23 @@
 <template>
   <div id="app">
-    <router-view></router-view>
+    <v-header></v-header>
+    <keep-alive>
+      <router-view class="view-router"  v-if="$route.meta.keepAlive"></router-view>
+    </keep-alive>
+    <router-view class="view-router"  v-if="!$route.meta.keepAlive"></router-view>
+    <router-view name="tabbar"></router-view> -->
   </div>
 </template>
 
 <script>
+import header from "@/components/header";
+
 export default {
-  name: 'APP'
+  name: "APP",
+  components: {
+    'v-header': header,
+  },
 };
 </script>
 
-<style>
-</style>
- 
+<style lang="scss" src="@/assets/scss/global.scss" />
