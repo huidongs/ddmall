@@ -10,8 +10,8 @@ const service = axios.create({
 // request interceptor
 service.interceptors.request.use(
     config => {
-    if (!config.headers['X-Litemall-Token']) {
-      config.headers['X-Litemall-Token'] = `${window.localStorage.getItem(
+    if (!config.headers['X-Ddmall-Token']) {
+      config.headers['X-Ddmall-Token'] = `${window.localStorage.getItem(
         'Authorization'
       ) || ''}`;
     }
